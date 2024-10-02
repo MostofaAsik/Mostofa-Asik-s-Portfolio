@@ -18,14 +18,14 @@
 </head>
 
 <body>
-
+    <!-- nav section start  -->
     <header class="header">
         <a href="#home" class="logo">
             Mostofa <span>Asik</span> 
         </a>
-        <p class="menu-icon"> <i class="fa-solid fa-bars "></i></p>
+        <p class="menu-icon" id="menu-icon"> <i class="fa-solid fa-bars "></i></p>
 
-        <nav class="navbar">
+        <nav class="navbar" id="navbar">
             <a href="#home" class="active">Home</a>
             <a href="#about">About</a>
             <a href="#education">Education</a>
@@ -35,6 +35,13 @@
 
         </nav>
     </header>
+
+
+
+    <!-- Nav section end -->
+
+
+
 
     <!-- home section start -->
     <section class="home" id="home">
@@ -47,11 +54,11 @@
                 iure!
             </p>
             <div class="social-icon">
-                <a href='https://www.linkedin.com/in/mostofa-asik-06ba6327b/'><i class="fa-brands fa-linkedin"></i></a>
-                <a href='https://github.com/MostofaAsik'><i class="fa-brands fa-github"></i></a>
-                <a href="https://www.facebook.com/MAS15060"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                <a href='mailto:mmostofaasik@gmail.com'><i class="fa-solid fa-envelope"></i></a>
+                <a href='https://www.linkedin.com/in/mostofa-asik-06ba6327b/' target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                <a href='https://github.com/MostofaAsik' target="_blank"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.facebook.com/MAS15060" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://www.instagram.com/mostofaasik/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href='mailto:mmostofaasik@gmail.com' target="_blank"><i class="fa-solid fa-envelope"></i></a>
             </div>
 
             <div class="btn-group">
@@ -65,6 +72,61 @@
     </section>
 
     <!-- home section end -->
+
+
+
+
+
+    <!-- Eduction section start -->
+    <section class="education" id="education">
+        <h2 class="heading">Education</h2>
+        <div class="timeline-items">
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2016</div>
+                <div class="timeline-content">
+                    <h3>SSC</h3>
+                    <p>At Science</p>
+                    <p>Shyamkur Secondary School</p>
+
+                </div>
+
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2018</div>
+                <div class="timeline-content">
+                    <h3>HSC</h3>
+                    <p>At Science</p>
+                    <p>Govt. Sheikh Hasina Padmapukur Degree College.</p>
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2018</div>
+                <div class="timeline-content">
+                    <h3>Honours</h3>
+                    <p>At Chemistry</p>
+                    <p>Govt. Michael Madhusudan College, Jessore</p>
+                </div>
+
+            </div>
+
+
+        </div>
+    </section>
+
+
+    <!-- Eduction section end -->
+
+
+
+
 
     <!-- Skills section start -->
     <section class="skills" id="skills">
@@ -80,6 +142,11 @@
 
     </section>
     <!-- Skills section end -->
+
+
+
+
+
     <!-- projects section start -->
     <section class="projects" id="projects">
         <div class="projects-section">
@@ -95,10 +162,85 @@
     <!-- projects section end -->
 
 
+
+
+
+    <!-- contact section start -->
+    <section class="contact" id="contact">
+        <h2 class="title">Contact Me</h2>
+        <p class="descriptionP">Submit the form below to get in touch with me</p>
+        <div class="social-and-contact">
+
+            <div class="social-links" data-aos="fade-right">
+                <ul>
+                    <li class="social-item rounded-tr-md">
+                        <a href="https://www.linkedin.com/in/mostofa-asik-06ba6327b/" target="_blank" rel="noreferer">
+                            LinkedIn <i class="fab fa-linkedin"></i>
+                        </a>
+                    </li>
+                    <li class="social-item">
+                        <a href="https://www.facebook.com/MAS15060" target="_blank" rel="noreferer">
+                            Facebook <i class="fab fa-facebook"></i>
+                        </a>
+                    </li>
+                    <li class="social-item">
+                        <a href="https://github.com/MostofaAsik" target="_blank" rel="noreferer">
+                            Github <i class="fab fa-github"></i>
+                        </a>
+                    </li>
+                    <li class="social-item">
+                        <a href="https://www.instagram.com/mostofaasik/" target="_blank" rel="noreferer">Instagram <i class="fa-brands fa-instagram"></i>
+                        </a>
+                    </li>
+                    <li class="social-item">
+                        <a href="mailto:mmostofaasik@gmail.com">
+                            Email <i class="fas fa-envelope"></i>
+                        </a>
+                    </li>
+                    <li class="social-item rounded-br-md">
+                        <a href="./images/resume/resume.pdf" download>
+                            Resume <i class="fas fa-file-alt"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="contact-container" data-aos="fade-left">
+                <div class="content-wrapper">
+                    <div class="form-wrapper">
+                        <form id="contact-form">
+                            <input type="text" id="from_name" name="from_name" placeholder="Enter Your Name" required />
+                            <input type="email" id="from_email" name="from_email" placeholder="name@gmail.com" required />
+                            <textarea id="message" name="message" placeholder="Your Message" rows="8" required></textarea>
+                            <button type="submit" class="submit-btn">Submit</button>
+                        </form>
+                        <div id="toast">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- conatact section end -->
+    <!-- footer section start-->
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Copyright © 2024 - All rights reserved</p>
+        </div>
+    </footer>
+    <!-- footer section end-->
+
+
     <!-- script  -->
     <script src="./js/script.js "></script>
     <!-- aos  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- email js  -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
 </body>
 
 </html>

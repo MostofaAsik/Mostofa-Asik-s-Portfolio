@@ -1,0 +1,111 @@
+@media screen and (max-width:768px) {
+    /* navbar section start  */
+    .navbar {
+        display: none;
+        /* Hide navbar by default */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.9);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transition: 0.3s ease;
+        z-index: 1000;
+    }
+    .navbar.active {
+        display: flex;
+        gap: 40px;
+    }
+    .navbar a {
+        font-size: 4rem;
+        margin-left: 0;
+        color: white;
+    }
+    .menu-icon {
+        display: block;
+        padding-right: 30px;
+    }
+    /* home section start  */
+    .home {
+        flex-direction: column-reverse;
+        gap: 3rem;
+    }
+    .home-image img {
+        width: 100%;
+    }
+    /* education section start  */
+    .timeline-item:nth-child(odd) {
+        padding-right: 0;
+    }
+    .timeline-item:nth-child(even) {
+        padding-left: 0;
+    }
+    .timeline-date {
+        padding-right: 113px;
+        padding-left: 207px;
+    }
+    .timeline-content:hover {
+        transform: scale(1.1);
+    }
+    /* skill section start  */
+    section {
+        padding: 20rem 4% 2rem;
+        ;
+    }
+    .skills-section {
+        padding-left: 20px;
+    }
+    .skills-grid {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 30px;
+    }
+    .skill-card {
+        width: 110%;
+    }
+    /* project section start  */
+    .projects-section {
+        padding: 15px;
+    }
+    .project-card {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .project-card img {
+        width: 100%;
+        height: 300px;
+        margin-bottom: 20px;
+    }
+    .project-info {
+        margin-left: 0;
+        padding-left: 0;
+        text-align: center;
+    }
+    .project-info h2 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+    .project-links {
+        gap: 30px;
+        font-size: 1.5rem;
+    }
+    /* contact section start  */
+    .social-and-contact {
+        flex-direction: column;
+        align-items: center;
+    }
+    .social-links,
+    .contact-container {
+        width: 100%;
+        padding: 10px;
+    }
+    /* //footer section start  */
+    .footer {
+        padding: 15px 0;
+        font-size: 1.5rem;
+    }
+}

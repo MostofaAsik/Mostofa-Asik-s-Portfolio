@@ -40,6 +40,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     ];
 
+    // nabbar start 
+
+
+    // nabbar end
+
+
+
     // skills starr
 
     const skillsGrid = document.getElementById('skills-grid');
@@ -74,6 +81,39 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
     `).join('');
 
+    //contact-form
+
+    (function() {
+        emailjs.init('Isga3c42NwkRdKHwi'); // Replace with your EmailJS User ID
+    })();
+
+    // Handle form submission
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+
+        emailjs.sendForm("service_x2y67o8", 'template_4rmx4wn', this)
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                showToast('Email sent successfully!', 'success');
+                document.getElementById('contact-form').reset();
+            }, function(error) {
+                console.log('FAILED...', error);
+                showToast('An error occurred while sending the email.', 'error');
+            });
+    });
+
+
+    function showToast(message, type) {
+        const toast = document.getElementById('toast');
+        toast.innerHTML = message;
+        toast.className = type;
+        toast.style.display = 'block';
+
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, 3000);
+    }
 
 
 
@@ -83,6 +123,24 @@ document.addEventListener("DOMContentLoaded", () => {
         duration: 800,
         easing: 'ease-in-cubic',
         mirror: true
+    });
+});
+
+
+const menuIcon = document.getElementById('menu-icon');
+const navbar = document.getElementById('navbar');
+
+
+menuIcon.addEventListener('click', function() {
+    navbar.classList.toggle('active');
+});
+
+
+const navLinks = document.querySelectorAll('.navbar a');
+
+navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+        navbar.classList.remove('active'); // Close menu after 
     });
 });
 
