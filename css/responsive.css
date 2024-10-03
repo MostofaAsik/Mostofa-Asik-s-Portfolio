@@ -2,7 +2,6 @@
     /* navbar section start  */
     .navbar {
         display: none;
-        /* Hide navbar by default */
         position: fixed;
         top: 0;
         left: 0;
@@ -27,7 +26,7 @@
     }
     .menu-icon {
         display: block;
-        padding-right: 30px;
+        padding-right: 10px;
     }
     /* home section start  */
     .home {
@@ -36,6 +35,14 @@
     }
     .home-image img {
         width: 100%;
+    }
+    /* //about section start  */
+    .headings h2 {
+        font-size: 3.5rem;
+    }
+    .contents p {
+        font-size: 1.5rem;
+        padding: 0 1rem;
     }
     /* education section start  */
     .timeline-item:nth-child(odd) {
@@ -53,8 +60,7 @@
     }
     /* skill section start  */
     section {
-        padding: 20rem 4% 2rem;
-        ;
+        padding: 10rem 4% 1rem;
     }
     .skills-section {
         padding-left: 20px;

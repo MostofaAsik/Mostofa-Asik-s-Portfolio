@@ -82,7 +82,7 @@ body {
 
 section {
     min-height: 100vh;
-    padding: 6rem 8% 6rem;
+    padding: 6rem 8% 1rem;
 }
 
 
@@ -154,6 +154,7 @@ span {
     line-height: 1.5;
     text-indent: indent;
     margin-bottom: 2rem;
+    text-align: justify;
 }
 
 .social-icon a {
@@ -298,6 +299,44 @@ span {
 
 
 /* home section end  */
+
+
+/* about section start  */
+
+.about-section {
+    width: 100%;
+    min-height: 100vh;
+    background: var(--bg-gradient);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+}
+
+.headings h2 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    display: inline-block;
+    padding-bottom: 5rem;
+    color: var(--text-color);
+}
+
+.contents p {
+    /* margin-top: 1rem; */
+    font-size: 2rem;
+    padding: 0 2rem;
+    text-align: justify;
+    line-height: 1.5;
+}
+
+
+/* about section end */
 
 
 /* education section start  */

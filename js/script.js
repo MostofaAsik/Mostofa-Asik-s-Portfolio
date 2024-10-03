@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
 
 
-        emailjs.sendForm("service_x2y67o8", 'template_4rmx4wn', this)
+        emailjs.sendForm("service_r4pcuge", 'template_4rmx4wn', this)
             .then(function(response) {
                 console.log('SUCCESS!', response.status, response.text);
                 showToast('Email sent successfully!', 'success');
@@ -140,7 +140,7 @@ const navLinks = document.querySelectorAll('.navbar a');
 
 navLinks.forEach(link => {
     link.addEventListener('click', function() {
-        navbar.classList.remove('active'); // Close menu after 
+        navbar.classList.remove('active');
     });
 });
 
