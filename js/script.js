@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //contact-form
 
     (function() {
-        emailjs.init('Isga3c42NwkRdKHwi'); // Replace with your EmailJS User ID
+        emailjs.init('Isga3c42NwkRdKHwi');
     })();
 
     // Handle form submission
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
 
 
-        emailjs.sendForm("service_r4pcuge", 'template_4rmx4wn', this)
+        emailjs.sendForm("service_pcev8ib", 'template_4rmx4wn', this)
             .then(function(response) {
                 console.log('SUCCESS!', response.status, response.text);
                 showToast('Email sent successfully!', 'success');
