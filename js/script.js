@@ -17,52 +17,207 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     const projects = [{
-            src: '../images/projects/img4.png',
-            title: 'Plan Picker (Team Work)',
-            client: 'https://github.com/nikkonbd/plan-picker-web',
-            server: 'https://github.com/nrb04/PLANpicker_server',
-            demo: 'https://planpicker.web.app/'
-        },
-        {
-            src: '../images/projects/img1.png',
-            title: 'MAS sports academy',
-            client: 'https://github.com/MostofaAsik/MAS-sports-academy-client',
-            server: 'https://github.com/MostofaAsik/MAS-sports-academy-server',
-            demo: 'https://sports-academy-a-12.web.app/'
-        },
-        {
-            src: '../images/projects/img2.png',
-            title: 'MAS toys center',
-            client: 'https://github.com/MostofaAsik/MAS-Toys-Center-client',
-            server: 'https://github.com/MostofaAsik/MAS-Toys-Center-server',
-            demo: 'https://mas-toys-center.web.app/'
-        },
+        src: '../images/projects/img4.png',
+        title: 'Plan Picker (Team Work)',
+        client: 'https://github.com/nikkonbd/plan-picker-web',
+        server: 'https://github.com/nrb04/PLANpicker_server',
+        demo: 'https://planpicker.web.app/'
+    },
+    {
+        src: '../images/projects/img1.png',
+        title: 'MAS sports academy',
+        client: 'https://github.com/MostofaAsik/MAS-sports-academy-client',
+        server: 'https://github.com/MostofaAsik/MAS-sports-academy-server',
+        demo: 'https://sports-academy-a-12.web.app/'
+    },
+    {
+        src: '../images/projects/img2.png',
+        title: 'MAS toys center',
+        client: 'https://github.com/MostofaAsik/MAS-Toys-Center-client',
+        server: 'https://github.com/MostofaAsik/MAS-Toys-Center-server',
+        demo: 'https://mas-toys-center.web.app/'
+    },
 
     ];
 
-    // nabbar start 
+    // nabbar start
+    const sections = document.querySelectorAll('section');
+
+    const navLinks = document.querySelectorAll('.navbar a'); // Select all navigation links
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent the default anchor behavior
+
+            const targetId = this.getAttribute('href').substring(1); // Extract the ID (without '#')
+            const targetSection = document.getElementById(targetId); // Find the section by ID
+
+            if (targetSection) {
+                smoothScroll(targetSection, 1000); // Call smoothScroll with a 2-second duration
+            }
+
+            // Optional: Handle active class for links
+            navLinks.forEach(nav => nav.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    function smoothScroll(target, duration) {
+        const start = window.scrollY;
+        const targetPosition = target.getBoundingClientRect().top + start; // Target position relative to the document
+        const distance = targetPosition - start;
+        let startTime = null;
+
+        function animation(currentTime) {
+            if (!startTime) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const run = ease(timeElapsed, start, distance, duration);
+
+            window.scrollTo(0, run);
+
+            if (timeElapsed < duration) requestAnimationFrame(animation);
+        }
+
+        // Ease function for smooth effect
+        function ease(t, b, c, d) {
+            t /= d / 2;
+            if (t < 1) return (c / 2) * t * t + b;
+            t--;
+            return (-c / 2) * (t * (t - 2) - 1) + b;
+        }
+
+        requestAnimationFrame(animation);
+    }
 
 
-    // nabbar end
+    const observerOptions = {
+        root: null, // Use the viewport as the root
+        threshold: 0.5 // 50% of the section should be visible to consider it active
+    };
+
+    const observerCallback = (entries) => {
+        entries.forEach(entry => {
+            const navLink = document.querySelector(`.navbar a[href="#${entry.target.id}"]`);
+            if (entry.isIntersecting) {
+                // Add active class to the matching link
+                navLinks.forEach(link => link.classList.remove('active'));
+                navLink.classList.add('active');
+            }
+        });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Observe each section
+    sections.forEach(section => observer.observe(section));
+
+    // navbar end
 
 
 
-    // skills starr
+    // skills start
+
+    //previous Html for Skill sections//
+
+    // <section class="skills" id="skills">
+    //     <div class="skills-section">
+    //         <div class="content">
+    //             <h2 class="title">Skills</h2>
+    //             <p class="description">These are the technologies I've worked with</p>
+    //             <div class="skills-grid" id="skills-grid">
+    //                 <!-- Skill cards will be appear-->
+    //             </div>
+    //         </div>
+    //     </div>
+
+    // </section>
+
+
+
+    //Previous JS for Skills//
+    // const skillsGrid = document.getElementById('skills-grid');
+    // skills.forEach(skill => {
+    //     const skillCard = document.createElement('div');
+    //     skillCard.classList.add('skill-card');
+    //     skillCard.setAttribute('data-aos', 'fade-up');
+
+    //     skillCard.innerHTML = `
+    //         <img src="${skill.src}" alt="${skill.title}">
+    //         <p>${skill.title}</p>
+    //     `;
+
+    //     skillsGrid.appendChild(skillCard);
+    // });
+
+
 
     const skillsGrid = document.getElementById('skills-grid');
+    const paginationControls = document.getElementById('pagination-controls');
+    const skillsPerPage = 9; // Number of skills per page
+    let currentPage = 1;
 
-    skills.forEach(skill => {
-        const skillCard = document.createElement('div');
-        skillCard.classList.add('skill-card');
-        skillCard.setAttribute('data-aos', 'fade-up');
 
-        skillCard.innerHTML = `
+    function renderSkills(page) {
+        // Clear the grid
+        skillsGrid.innerHTML = '';
+
+        // Calculate the start and end indices for the current page
+        const start = (page - 1) * skillsPerPage;
+        const end = start + skillsPerPage;
+
+        // Render skills for the current page
+        const currentSkills = skills.slice(start, end);
+        currentSkills.forEach(skill => {
+            const skillCard = document.createElement('div');
+            skillCard.classList.add('skill-card');
+            skillCard.setAttribute('data-aos', 'fade-up');
+
+            skillCard.innerHTML = `
             <img src="${skill.src}" alt="${skill.title}">
             <p>${skill.title}</p>
         `;
 
-        skillsGrid.appendChild(skillCard);
-    });
+            skillsGrid.appendChild(skillCard);
+        });
+
+        // Smooth scroll to skills section if necessary
+        document.getElementById('skills').scrollIntoView({ behavior: 'smooth' });
+    }
+
+
+    function renderPagination() {
+
+        // Clear pagination controls
+        paginationControls.innerHTML = '';
+
+        // Calculate the total number of pages
+        const totalPages = Math.ceil(skills.length / skillsPerPage);
+
+        for (let i = 1; i <= totalPages; i++) {
+            const button = document.createElement('button');
+            button.textContent = i;
+            button.classList.add('pagination-btn');
+
+
+
+            if (i === currentPage) {
+                button.classList.add('active');
+            }
+
+            button.addEventListener('click', (event) => {
+                event.preventDefault(); // Prevent any default behavior
+                currentPage = i;
+                renderSkills(currentPage);
+                renderPagination();
+            });
+
+            paginationControls.appendChild(button);
+        }
+    }
+
+    // Initial render
+    renderSkills(currentPage);
+    renderPagination();
 
     //skills end
     //projects start
@@ -83,21 +238,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //contact-form
 
-    (function() {
+    (function () {
         emailjs.init('Isga3c42NwkRdKHwi');
     })();
 
-    // Handle form submission
-    document.getElementById('contact-form').addEventListener('submit', function(e) {
+
+    document.getElementById('contact-form').addEventListener('submit', function (e) {
         e.preventDefault();
 
 
         emailjs.sendForm("service_pcev8ib", 'template_4rmx4wn', this)
-            .then(function(response) {
+            .then(function (response) {
                 console.log('SUCCESS!', response.status, response.text);
                 showToast('Email sent successfully!', 'success');
                 document.getElementById('contact-form').reset();
-            }, function(error) {
+            }, function (error) {
                 console.log('FAILED...', error);
                 showToast('An error occurred while sending the email.', 'error');
             });
@@ -131,7 +286,7 @@ const menuIcon = document.getElementById('menu-icon');
 const navbar = document.getElementById('navbar');
 
 
-menuIcon.addEventListener('click', function() {
+menuIcon.addEventListener('click', function () {
     navbar.classList.toggle('active');
 });
 
@@ -139,7 +294,7 @@ menuIcon.addEventListener('click', function() {
 const navLinks = document.querySelectorAll('.navbar a');
 
 navLinks.forEach(link => {
-    link.addEventListener('click', function() {
+    link.addEventListener('click', function () {
         navbar.classList.remove('active');
     });
 });

@@ -299,7 +299,23 @@ span {
 
 
 /* home section end  */
+/* Navabr section start */
+.navbar a {
+    text-decoration: none;
+    color: gray;
+    padding: 10px;
+}
+.navbar a.active {
+    color:var(--second-color); /* Adjust to your preferred active color */
+    font-weight: bold;
+    /* text-decoration: underline; */
+}
 
+
+
+
+
+/* Navabr section end */
 
 /* about section start  */
 
@@ -789,3 +805,40 @@ section {
     animation-timeline: view();
     animation-range: entry 5% cover 40%;
 } */
+
+
+
+/* if no need to pagination delete below css . Its only for pagination css */
+
+/* pagination style  */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    margin: 0 5px;
+    padding: 10px 15px;
+    border: none;
+    background-color: var(--second-color);
+    color: black;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+   font-weight: bold;
+   font-size: 20px;
+}
+
+.pagination button:hover {
+    background-color: #0056b3;
+}
+
+.pagination button.active {
+    background-color: #b04808;
+    cursor: default;
+}
+
+
+
+
