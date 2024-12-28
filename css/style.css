@@ -149,7 +149,7 @@ span {
 }
 
 .home-content p {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 500;
     line-height: 1.5;
     text-indent: indent;
@@ -345,7 +345,7 @@ span {
 
 .contents p {
     /* margin-top: 1rem; */
-    font-size: 2rem;
+    font-size: 2.5rem;
     padding: 0 2rem;
     text-align: justify;
     line-height: 1.5;
@@ -838,6 +838,7 @@ section {
     background-color: #b04808;
     cursor: default;
 }
+
 
 
 

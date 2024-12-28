@@ -1,4 +1,3 @@
-//skill section start//
 document.addEventListener("DOMContentLoaded", () => {
     const skills = [
         { id: 1, src: '../images/html.png', title: "HTML" },
@@ -13,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
         { id: 10, src: '../images/mongodb.png', title: "MongoDB" },
         { id: 11, src: '../images/firebase.png', title: "Firebase" },
         { id: 12, src: '../images/github.png', title: "Github" },
-
     ];
 
     const projects = [{
@@ -37,136 +35,68 @@ document.addEventListener("DOMContentLoaded", () => {
         server: 'https://github.com/MostofaAsik/MAS-Toys-Center-server',
         demo: 'https://mas-toys-center.web.app/'
     },
-
     ];
 
-    // nabbar start
-    const sections = document.querySelectorAll('section');
+    // Select all sections and navigation links
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll("nav a");
 
-    const navLinks = document.querySelectorAll('.navbar a'); // Select all navigation links
+    // Function to dynamically set the active nav link
+    const updateActiveNavLink = () => {
+        let currentSection = "home"; // Default to the home section
 
-    navLinks.forEach(link => {
-        link.addEventListener('click', function (event) {
-            event.preventDefault(); // Prevent the default anchor behavior
+        sections.forEach((section) => {
+            const sectionTop = section.offsetTop - 50; // Adjust for smooth detection
+            const sectionHeight = section.offsetHeight;
 
-            const targetId = this.getAttribute('href').substring(1); // Extract the ID (without '#')
-            const targetSection = document.getElementById(targetId); // Find the section by ID
-
-            if (targetSection) {
-                smoothScroll(targetSection, 1000); // Call smoothScroll with a 2-second duration
+            if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                currentSection = section.getAttribute("id");
             }
+        });
 
-            // Optional: Handle active class for links
-            navLinks.forEach(nav => nav.classList.remove('active'));
-            this.classList.add('active');
+        // Update the active class on nav links
+        navLinks.forEach((link) => {
+            link.classList.remove("active");
+            if (link.getAttribute("href").includes(currentSection)) {
+                link.classList.add("active");
+            }
+        });
+    };
+
+    // Ensure the home section is displayed first on load
+    window.onload = () => {
+        document.getElementById("home").scrollIntoView({ behavior: "smooth" });
+        navLinks.forEach((link) => link.classList.remove("active"));
+        document.querySelector('nav a[href="#home"]').classList.add("active");
+    };
+
+    // Smooth scrolling for navigation links
+    navLinks.forEach(link => {
+        link.addEventListener("click", function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute("href").substring(1);
+            const targetSection = document.getElementById(targetId);
+
+            targetSection.scrollIntoView({ behavior: "smooth" });
+            navLinks.forEach((link) => link.classList.remove("active"));
+            this.classList.add("active");
         });
     });
 
-    function smoothScroll(target, duration) {
-        const start = window.scrollY;
-        const targetPosition = target.getBoundingClientRect().top + start; // Target position relative to the document
-        const distance = targetPosition - start;
-        let startTime = null;
+    // Listen to the scroll event to update nav links dynamically
+    window.addEventListener("scroll", updateActiveNavLink);
 
-        function animation(currentTime) {
-            if (!startTime) startTime = currentTime;
-            const timeElapsed = currentTime - startTime;
-            const run = ease(timeElapsed, start, distance, duration);
-
-            window.scrollTo(0, run);
-
-            if (timeElapsed < duration) requestAnimationFrame(animation);
-        }
-
-        // Ease function for smooth effect
-        function ease(t, b, c, d) {
-            t /= d / 2;
-            if (t < 1) return (c / 2) * t * t + b;
-            t--;
-            return (-c / 2) * (t * (t - 2) - 1) + b;
-        }
-
-        requestAnimationFrame(animation);
-    }
-
-
-    const observerOptions = {
-        root: null, // Use the viewport as the root
-        threshold: 0.5 // 50% of the section should be visible to consider it active
-    };
-
-    const observerCallback = (entries) => {
-        entries.forEach(entry => {
-            const navLink = document.querySelector(`.navbar a[href="#${entry.target.id}"]`);
-            if (entry.isIntersecting) {
-                // Add active class to the matching link
-                navLinks.forEach(link => link.classList.remove('active'));
-                navLink.classList.add('active');
-            }
-        });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-    // Observe each section
-    sections.forEach(section => observer.observe(section));
-
-    // navbar end
-
-
-
-    // skills start
-
-    //previous Html for Skill sections//
-
-    // <section class="skills" id="skills">
-    //     <div class="skills-section">
-    //         <div class="content">
-    //             <h2 class="title">Skills</h2>
-    //             <p class="description">These are the technologies I've worked with</p>
-    //             <div class="skills-grid" id="skills-grid">
-    //                 <!-- Skill cards will be appear-->
-    //             </div>
-    //         </div>
-    //     </div>
-
-    // </section>
-
-
-
-    //Previous JS for Skills//
-    // const skillsGrid = document.getElementById('skills-grid');
-    // skills.forEach(skill => {
-    //     const skillCard = document.createElement('div');
-    //     skillCard.classList.add('skill-card');
-    //     skillCard.setAttribute('data-aos', 'fade-up');
-
-    //     skillCard.innerHTML = `
-    //         <img src="${skill.src}" alt="${skill.title}">
-    //         <p>${skill.title}</p>
-    //     `;
-
-    //     skillsGrid.appendChild(skillCard);
-    // });
-
-
-
+    // Skills section
     const skillsGrid = document.getElementById('skills-grid');
     const paginationControls = document.getElementById('pagination-controls');
     const skillsPerPage = 9; // Number of skills per page
     let currentPage = 1;
-
-
-    function renderSkills(page) {
-        // Clear the grid
-        skillsGrid.innerHTML = '';
-
-        // Calculate the start and end indices for the current page
+    function renderSkills(page, shouldScroll = false) {
+        skillsGrid.innerHTML = ''; // Clear the grid
         const start = (page - 1) * skillsPerPage;
         const end = start + skillsPerPage;
-
-        // Render skills for the current page
         const currentSkills = skills.slice(start, end);
+
         currentSkills.forEach(skill => {
             const skillCard = document.createElement('div');
             skillCard.classList.add('skill-card');
@@ -180,32 +110,26 @@ document.addEventListener("DOMContentLoaded", () => {
             skillsGrid.appendChild(skillCard);
         });
 
-        // Smooth scroll to skills section if necessary
-        document.getElementById('skills').scrollIntoView({ behavior: 'smooth' });
+        // Only scroll into view if explicitly requested
+        if (shouldScroll) {
+            document.getElementById('skills').scrollIntoView({ behavior: 'smooth' });
+        }
     }
 
 
+
     function renderPagination() {
-
-        // Clear pagination controls
-        paginationControls.innerHTML = '';
-
-        // Calculate the total number of pages
+        paginationControls.innerHTML = ''; // Clear pagination controls
         const totalPages = Math.ceil(skills.length / skillsPerPage);
 
         for (let i = 1; i <= totalPages; i++) {
             const button = document.createElement('button');
             button.textContent = i;
             button.classList.add('pagination-btn');
+            if (i === currentPage) button.classList.add('active');
 
-
-
-            if (i === currentPage) {
-                button.classList.add('active');
-            }
-
-            button.addEventListener('click', (event) => {
-                event.preventDefault(); // Prevent any default behavior
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
                 currentPage = i;
                 renderSkills(currentPage);
                 renderPagination();
@@ -215,12 +139,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Initial render
-    renderSkills(currentPage);
+    renderSkills(currentPage); // Initial render
     renderPagination();
 
-    //skills end
-    //projects start
+    // Projects section
     const projectsGrid = document.getElementById('projects-grid');
     projectsGrid.innerHTML = projects.map(project => `
         <div class="project-card" data-aos="fade-up">
@@ -236,17 +158,13 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
     `).join('');
 
-    //contact-form
-
+    // Contact form
     (function () {
         emailjs.init('Isga3c42NwkRdKHwi');
     })();
 
-
     document.getElementById('contact-form').addEventListener('submit', function (e) {
         e.preventDefault();
-
-
         emailjs.sendForm("service_pcev8ib", 'template_4rmx4wn', this)
             .then(function (response) {
                 console.log('SUCCESS!', response.status, response.text);
@@ -258,45 +176,28 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     });
 
-
     function showToast(message, type) {
         const toast = document.getElementById('toast');
         toast.innerHTML = message;
         toast.className = type;
         toast.style.display = 'block';
-
-        setTimeout(() => {
-            toast.style.display = 'none';
-        }, 3000);
+        setTimeout(() => toast.style.display = 'none', 3000);
     }
 
+    AOS.init({ duration: 800, easing: 'ease-in-cubic', mirror: true });
 
+    // Navbar toggle
+    const menuIcon = document.getElementById('menu-icon');
+    const navbar = document.getElementById('navbar');
 
+    menuIcon.addEventListener('click', function () {
+        navbar.classList.toggle('active');
+    });
 
-
-    AOS.init({
-        duration: 800,
-        easing: 'ease-in-cubic',
-        mirror: true
+    const navLinksMobile = document.querySelectorAll('.navbar a');
+    navLinksMobile.forEach(link => {
+        link.addEventListener('click', function () {
+            navbar.classList.remove('active');
+        });
     });
 });
-
-
-const menuIcon = document.getElementById('menu-icon');
-const navbar = document.getElementById('navbar');
-
-
-menuIcon.addEventListener('click', function () {
-    navbar.classList.toggle('active');
-});
-
-
-const navLinks = document.querySelectorAll('.navbar a');
-
-navLinks.forEach(link => {
-    link.addEventListener('click', function () {
-        navbar.classList.remove('active');
-    });
-});
-
-//skill section end//
