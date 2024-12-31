@@ -14,27 +14,43 @@ document.addEventListener("DOMContentLoaded", () => {
         { id: 12, src: '../images/github.png', title: "Github" },
     ];
 
-    const projects = [{
-        src: '../images/projects/img4.png',
-        title: 'Plan Picker (Team Work)',
-        client: 'https://github.com/nikkonbd/plan-picker-web',
-        server: 'https://github.com/nrb04/PLANpicker_server',
-        demo: 'https://planpicker.web.app/'
-    },
-    {
-        src: '../images/projects/img1.png',
-        title: 'MAS sports academy',
-        client: 'https://github.com/MostofaAsik/MAS-sports-academy-client',
-        server: 'https://github.com/MostofaAsik/MAS-sports-academy-server',
-        demo: 'https://sports-academy-a-12.web.app/'
-    },
-    {
-        src: '../images/projects/img2.png',
-        title: 'MAS toys center',
-        client: 'https://github.com/MostofaAsik/MAS-Toys-Center-client',
-        server: 'https://github.com/MostofaAsik/MAS-Toys-Center-server',
-        demo: 'https://mas-toys-center.web.app/'
-    },
+    const projects = [
+        {
+            src: '../images/projects/img4.png',
+            title: 'Plan Picker (Team Work)',
+            client: 'https://github.com/nikkonbd/plan-picker-web',
+            server: 'https://github.com/nrb04/PLANpicker_server',
+            demo: 'https://planpicker.web.app/',
+            features: [
+                "Dynamic team collaboration tools",
+                "We developed a real-time, modern, and user-friendly website for scheduling and appointments.",
+                "Real-time updates and notifications with Admin Dashboard, Event, Scheduling, Calendar, Service, Availability etc."
+            ]
+        },
+        {
+            src: '../images/projects/img1.png',
+            title: 'MAS sports academy',
+            client: 'https://github.com/MostofaAsik/MAS-sports-academy-client',
+            server: 'https://github.com/MostofaAsik/MAS-sports-academy-server',
+            demo: 'https://sports-academy-a-12.web.app/',
+            features: [
+                "Dashboard specification (Admin, Instructor, and User)",
+                "Interactive course booking system",
+                "Admin Can approve or deny the classes. Admin also manages all users."
+            ]
+        },
+        {
+            src: '../images/projects/NextGen-Mobiles.png',
+            title: 'NextGen Mobiles',
+            client: 'https://github.com/MostofaAsik/NextGen_Mobiles_Client',
+            server: 'https://github.com/MostofaAsik/NextGen_Mobiles_Server',
+            demo: 'https://nextgen-mobiles.web.app/',
+            features: [
+                "Role Based User Experience like buyer,seller and admin.",
+                "Buyer Add wishlist first then add to cart and pay for their product and Seller Add product",
+                "Admin panel for inventory user management"
+            ]
+        },
     ];
 
     // Select all sections and navigation links
@@ -144,19 +160,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Projects section
     const projectsGrid = document.getElementById('projects-grid');
-    projectsGrid.innerHTML = projects.map(project => `
-        <div class="project-card" data-aos="fade-up">
-            <img src="${project.src}" alt="${project.title}">
-            <div class="project-info">
-                <h2>${project.title}</h2>
-                <div class="project-links">
-                    <a href="${project.client}" target="_blank">Client</a>
-                    <a href="${project.server}" target="_blank">Server</a>
-                    <a href="${project.demo}" target="_blank">Demo</a>
-                </div>
+    projectsGrid.innerHTML = projects.map((project, index) => `
+    <div class="project-card" data-aos="fade-up">
+        <img src="${project.src}" alt="${project.title}">
+        <div class="project-info">
+            <h2>${project.title}</h2>
+            <ul class="project-features">
+                ${project.features.map(feature => `<li>${feature}</li>`).join('')}
+            </ul>
+            <div class="project-links">
+                <a href="${project.client}" target="_blank">Client</a>
+                <a href="${project.server}" target="_blank">Server</a>
+                <a href="${project.demo}" target="_blank">Demo</a>
             </div>
+          
         </div>
-    `).join('');
+    </div>
+`).join('');
+
+
+    //modal
+
+    //modal end
+
 
     // Contact form
     (function () {
@@ -184,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => toast.style.display = 'none', 3000);
     }
 
-    AOS.init({ duration: 800, easing: 'ease-in-cubic', mirror: true });
+    AOS.init({ duration: 800, easing: 'ease-in-cubic', mirror: false });
 
     // Navbar toggle
     const menuIcon = document.getElementById('menu-icon');
@@ -200,4 +226,10 @@ document.addEventListener("DOMContentLoaded", () => {
             navbar.classList.remove('active');
         });
     });
+
+
+
+
+
+
 });
