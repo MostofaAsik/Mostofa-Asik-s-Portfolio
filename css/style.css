@@ -581,9 +581,14 @@ span {
     height: 300px;
     border-radius: 10px;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    object-position: top center;
+    transition: all 10s ease-in-out;
 }
-
+.project-card img:hover {
+    cursor: pointer;
+    object-position: bottom center;
+    transition: all 10s ease-in-out;
+}
 
 
 
@@ -622,6 +627,7 @@ span {
 
 .project-links {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     font-size: 2rem;
 }
@@ -653,9 +659,7 @@ span {
     box-shadow: -5px -5px 15px tomato, 5px 5px 15px red;
 }
 
-.project-card:hover img {
-    transform: scale(1.1);
-}
+
 
 
 /* projects end */
@@ -772,7 +776,7 @@ button.submit-btn {
 }
 
 button.submit-btn:hover {
-    box-shadow: -5px 5px 45px rgb(220, 82, 124), 5px -5px 54px rgba(103, 7, 7, 0.866);
+    box-shadow: -5px 2px 15px rgb(220, 82, 124), 2px -5px 14px rgba(103, 7, 7, 0.866);
     background-color: var(--second-bg-color);
     color: var(--second-color);
 }
@@ -861,5 +865,83 @@ section {
     cursor: default;
 }
 
+
+.project-details-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: var(--second-bg-color);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 800px;
+    width: 90%;
+    color: var(--text-color);
+    text-align: center;
+    position: relative;
+}
+.project-links{
+    display: flex;
+    justify-content: space-between;
+    font-size: 2rem;
+    margin-top: 20px;
+}
+.details-btn{
+    padding: 3px 5px;
+    background-color: var(--second-color);
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 2rem;
+}
+.modal-content h2 {
+    color: red;
+    font-size: 4rem;
+    margin-bottom: 10px;
+}
+.description{
+    font-size: 2rem;
+    margin-top: 15px;
+    color: var(--text-color);
+}
+
+
+.modal-content img {
+   width: 100%;
+   object-fit: cover;
+   object-position: top center;
+    height: 300px;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+     transition: all 10s ease-in-out;
+}
+.modal-content img:hover {
+
+  cursor: pointer;
+    object-position: bottom center;
+    transition: all 10s ease-in-out;
+}
+.modal-content .close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 5rem;
+    color: var(--text-color);
+    cursor: pointer;
+}
 
 

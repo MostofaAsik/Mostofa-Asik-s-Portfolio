@@ -76,28 +76,40 @@
     .projects-section {
         padding: 15px;
     }
-    .project-card {
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
+      .project-card {
+        flex-direction: column; /* Stack elements vertically */
+        padding: 15px; /* Adjust padding */
     }
+
     .project-card img {
-        width: 100%;
-        height: 300px;
-        margin-bottom: 20px;
+        width: 100%; /* Make the image full width */
+        height: 250px; /* Adjust height for smaller screens */
     }
+
     .project-info {
-        margin-left: 0;
-        padding-left: 0;
-        text-align: center;
+        width: 100%;
+        padding-left: 0; /* Remove padding for mobile */
+        margin-left: 0; /* Remove margin for mobile */
+        margin-top: 20px; /* Add space between image and text */
     }
+
     .project-info h2 {
-        font-size: 2rem;
-        margin-bottom: 30px;
+        font-size: 2.5rem; /* Adjust font size for mobile */
     }
+
+    .project-features {
+        font-size: 1.8rem; /* Reduce font size for mobile */
+    }
+
     .project-links {
-        gap: 30px;
-        font-size: 1.5rem;
+        font-size: 1.6rem; /* Reduce font size for mobile */
+        flex-direction: row; /* Stack links vertically */
+        align-items: center; /* Align links to the left */
+        justify-content: space-between;
+    }
+
+    .project-links p {
+        margin-bottom: 10px; /* Add spacing between links */
     }
     /* contact section start  */
     .social-and-contact {
@@ -114,4 +126,35 @@
         padding: 15px 0;
         font-size: 1.5rem;
     }
+/* //modal  */
+.modal-content .close-modal {
+    font-size: 4rem;
+    padding: 5px 10px;
+    top: 5px;
+}
+ .modal-content {
+        padding: 15px;
+    }
+
+    .modal-content h2 {
+        font-size: 2.5rem;
+    }
+
+    .description {
+        font-size: 1.6rem;
+    }
+
+    .project-links {
+        font-size: 1.5rem;
+    }
+
+    .modal-content img {
+        height: 200px; /* Reduce image height for smaller screens */
+    }
+
+    .details-btn {
+        font-size: 1.4rem; /* Adjust button font size */
+        padding: 2px 4px;
+    }
+
 }

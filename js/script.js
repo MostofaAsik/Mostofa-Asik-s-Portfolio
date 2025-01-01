@@ -21,22 +21,11 @@ document.addEventListener("DOMContentLoaded", () => {
             client: 'https://github.com/nikkonbd/plan-picker-web',
             server: 'https://github.com/nrb04/PLANpicker_server',
             demo: 'https://planpicker.web.app/',
+            description: "This is a team project. It is a web application that helps users to plan their daily tasks. Users can create, update, and delete their plans. They can also set a reminder for their plans.",
             features: [
                 "Dynamic team collaboration tools",
                 "We developed a real-time, modern, and user-friendly website for scheduling and appointments.",
                 "Real-time updates and notifications with Admin Dashboard, Event, Scheduling, Calendar, Service, Availability etc."
-            ]
-        },
-        {
-            src: '../images/projects/img1.png',
-            title: 'MAS sports academy',
-            client: 'https://github.com/MostofaAsik/MAS-sports-academy-client',
-            server: 'https://github.com/MostofaAsik/MAS-sports-academy-server',
-            demo: 'https://sports-academy-a-12.web.app/',
-            features: [
-                "Dashboard specification (Admin, Instructor, and User)",
-                "Interactive course booking system",
-                "Admin Can approve or deny the classes. Admin also manages all users."
             ]
         },
         {
@@ -45,12 +34,28 @@ document.addEventListener("DOMContentLoaded", () => {
             client: 'https://github.com/MostofaAsik/NextGen_Mobiles_Client',
             server: 'https://github.com/MostofaAsik/NextGen_Mobiles_Server',
             demo: 'https://nextgen-mobiles.web.app/',
+            description: "This is an e-commerce website. It has a dashboard specification for Admin, Seller, and Buyer. Buyer can add products to the cart and pay for them. Seller can add products.",
             features: [
                 "Role Based User Experience like buyer,seller and admin.",
                 "Buyer Add wishlist first then add to cart and pay for their product and Seller Add product",
                 "Admin panel for inventory user management"
             ]
         },
+        {
+            src: '../images/projects/img1.png',
+            title: 'MAS sports academy',
+            client: 'https://github.com/MostofaAsik/MAS-sports-academy-client',
+            server: 'https://github.com/MostofaAsik/MAS-sports-academy-server',
+            demo: 'https://sports-academy-a-12.web.app/',
+            description: "This is a sports academy website. It has a dashboard specification for Admin, Instructor, and User. Admin can approve or deny the classes. Admin also manages all users.",
+            features: [
+                "Dashboard specification (Admin, Instructor, and User)",
+                "Interactive course booking system",
+                "Admin Can approve or deny the classes. Admin also manages all users."
+            ]
+        },
+
+
     ];
 
     // Select all sections and navigation links
@@ -116,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
         currentSkills.forEach(skill => {
             const skillCard = document.createElement('div');
             skillCard.classList.add('skill-card');
-            skillCard.setAttribute('data-aos', 'fade-up');
+            // skillCard.setAttribute('data-aos', 'fade-up');
 
             skillCard.innerHTML = `
             <img src="${skill.src}" alt="${skill.title}">
@@ -158,30 +163,84 @@ document.addEventListener("DOMContentLoaded", () => {
     renderSkills(currentPage); // Initial render
     renderPagination();
 
+
+
+    //modal start
+
+
+    //modal end
+
     // Projects section
     const projectsGrid = document.getElementById('projects-grid');
     projectsGrid.innerHTML = projects.map((project, index) => `
-    <div class="project-card" data-aos="fade-up">
-        <img src="${project.src}" alt="${project.title}">
-        <div class="project-info">
-            <h2>${project.title}</h2>
-            <ul class="project-features">
-                ${project.features.map(feature => `<li>${feature}</li>`).join('')}
-            </ul>
-            <div class="project-links">
-                <a href="${project.client}" target="_blank">Client</a>
-                <a href="${project.server}" target="_blank">Server</a>
-                <a href="${project.demo}" target="_blank">Demo</a>
-            </div>
-          
+    <div class="project-card" >
+    <img src="${project.src}" alt="${project.title}">
+    <div class="project-info">
+        <h2>${project.title}</h2>
+        <ul class="project-features">
+            ${project.features.map(feature => `<li>${feature}</li>`).join('')}
+        </ul>
+        <div class="project-links">
+            <a href="${project.client}" target="_blank">Client</a>
+            <a href="${project.server}" target="_blank">Server</a>
+            <a href="${project.demo}" target="_blank">Demo</a>
+            <button class="details-btn" data-index="${index}">Details</button>
         </div>
+       
     </div>
+</div>
+
 `).join('');
 
 
-    //modal
+
+    //modal start
+
+    // Add click event listener for the Details button
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('details-btn')) {
+            const index = e.target.getAttribute('data-index');
+            const project = projects[index];
+            showProjectDetails(project);
+        }
+    });
+
+    // Function to show project details
+    function showProjectDetails(project) {
+        const detailsContainer = document.createElement('div');
+        detailsContainer.classList.add('project-details-modal');
+        detailsContainer.innerHTML = `
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <h2>${project.title}</h2>
+           
+            <p class="description">${project.description || 'No additional details provided.'}</p>
+            
+            <div class="project-links">
+                <p><a href="${project.client}" target="_blank">Client</a></p>
+                <p><a href="${project.server}" target="_blank">Server</a></p>
+                <p><a href="${project.demo}" target="_blank">Demo</a></p>
+            </div>
+            <img src="${project.src}" alt="${project.title}">
+        </div>
+    `;
+        document.body.appendChild(detailsContainer);
+
+        // Prevent background scrolling
+        document.body.style.overflow = 'hidden';
+
+        // Add close functionality
+        detailsContainer.querySelector('.close-modal').addEventListener('click', () => {
+            document.body.removeChild(detailsContainer);
+            // Re-enable scrolling
+            document.body.style.overflow = ''; // Reset overflow to default
+        });
+    }
+
+
 
     //modal end
+
 
 
     // Contact form
